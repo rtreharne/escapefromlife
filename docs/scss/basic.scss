@@ -1,0 +1,46 @@
+@import 'variables.scss';
+
+body {
+  font-size: 24px;
+}
+
+.full-height {
+  min-height: 100vh;
+}
+
+.headline {
+  padding-top: 5px;
+}
+
+h1.big-title {
+  font-size: 4em;
+  margin-top: 10px;
+}
+
+font.pink {
+  color: $highlight
+}
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
+.row {
+  width: 100%;
+  margin:0;
+}
+
+p.narrative {
+  display: none;
+}
+
+p.narrative.select {
+  display: block;
+}
+
+.story {
+  min-height: 200px;
+}
