@@ -1,22 +1,34 @@
+var score = 0;
+var max_score = 0;
+
 $('a.next').click( function(e) {e.preventDefault();
     forward();
   } );
 
-$( 'body' ).on( 'click', 'li', function () {
+$( 'body' ).on( 'click', 'li.answer', function () {
   selected = this.innerHTML;
   parent = this.parentNode.parentNode;
   if (this.innerHTML == $(parent).find('p.answer').text()) {
-    console.log('correct!');
-    console.log($(parent).find('p.question-number').text());
-
+    score += 10;
+    if (score >= $(parent).attr('score')) {
+      forward();
+    };
+    questionInit(questionElements, questionObj);
   } else {
-    console.log('incorrect');
+    score -= 10;
+    $("body").find(".score").html("Score: " + score);
+    $(this).removeClass('answer').addClass('red').addClass('fade');
   };
 });
 
 function forward() {
   this_p = $('.narrative.select');
   next_p = this_p.next('.narrative');
+  if (next_p.attr('class').search('question') == 0) {
+    $('a.next').addClass('fade');
+  } else {
+    $('a.next').removeClass('fade');
+  };
   this_p.removeClass('select');
   next_p.addClass('select');
   this_p.hide();
@@ -47,10 +59,12 @@ $("body").keydown(function(e){
 
 // on load. look for .question class
 // replace html with question form.
-var questionElements = $("body").find(".question");
-var questionObj = []
 
-function questionInit (questionElements, questionObj) {
+
+function questionInit () {
+  var questionElements = $("body").find(".question");
+  $("body").find(".score").html("Score: " + score);
+  var questionObj = []
   this.questionElements = questionElements;
   this.questionObj = questionObj;
 
@@ -72,4 +86,4 @@ function newQuestion(e, objId, newObj=false) {
 }
 
 
-questionInit(questionElements, questionObj);
+questionInit();

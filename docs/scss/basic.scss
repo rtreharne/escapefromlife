@@ -45,8 +45,12 @@ p.narrative.select {
   min-height: 200px;
 }
 
-li {
+li.answer {
   cursor: pointer;
+}
+
+li.red {
+  color: red;
 }
 
 p.answer, p.question-number {

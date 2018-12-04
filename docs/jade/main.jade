@@ -16,7 +16,7 @@
     p.narrative
       | You can't explain why ... but you know it to be true ...
 
-    .question.roof.narrative
+    .question.roof.narrative(score='30')
 
     p.narrative
       | Success! You decend to the third floor.
@@ -44,8 +44,27 @@
       font.pink  HE
       |  is.
 
-    .question.roof.narrative
+    .question.roof.narrative(score='60')
+
+    p.narrative
+      | Success! Elaine's keys are in her pocket.
+
+    p.narrative
+      | Elaine suggests that you visit the labs ...
+      |  you descend to the third floor and enter Lab A.
+    p.narrative
+      | Is it your imaginiation or is it getting hotter?
+    p.narrative
+      | The lab is dark ...
+      |  you can hear whispers from the far side of the room ...
+      |  you approach cautiously
+    p.narrative
+      | You find three of your demonstrators - Hammed, Sarah and Rudi.
+      |  They have been arguing. They see you.
+
+    .question.lab.narrative(score='90')
 
   .col.col-lg-offset-2.col-lg-8.title.headline.navigate
+    p.score
     a.next(href="#")
       | Next
