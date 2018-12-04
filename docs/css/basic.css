@@ -26,7 +26,7 @@ font.pink {
   width: 100%;
   margin: 0; }
 
-p.narrative {
+.narrative {
   display: none; }
 
 p.narrative.select {
@@ -34,3 +34,9 @@ p.narrative.select {
 
 .story {
   min-height: 200px; }
+
+li {
+  cursor: pointer; }
+
+p.answer, p.question-number {
+  display: none; }

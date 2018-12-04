@@ -33,7 +33,7 @@ font.pink {
   margin:0;
 }
 
-p.narrative {
+.narrative {
   display: none;
 }
 
@@ -43,4 +43,12 @@ p.narrative.select {
 
 .story {
   min-height: 200px;
+}
+
+li {
+  cursor: pointer;
+}
+
+p.answer, p.question-number {
+  display: none;
 }
