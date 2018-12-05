@@ -1,24 +1,3 @@
-function randomInt(min, max) {
-  // retunr n random integers
-  // in the range [min, max]
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function randomInts(n, min, max) {
-  var nList = [];
-  for (i = 0; i < n; i++) {
-    nList.push(randomInt(min, max));
-  }
-  return nList;
-}
-
-function shuffle(a) {
-    for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-}
 
 function testQuestion () {
 
@@ -27,9 +6,7 @@ function testQuestion () {
   this.timeFinish = "";
 
   this.score_min = 0;
-  this.score_max = 0;
-
-
+  this.score_max = 30;
 
   this.create_input = function() {
     return randomInts(2, 0, 10);
@@ -65,6 +42,62 @@ function testQuestion () {
     tempHTML = "<ul>";
     for (i = 0; i < answerList.length; i++) {
       tempHTML += ("<li class='answer'>" + String(answerList[i]) + "</li>");
+    };
+    tempHTML += "</ul>";
+    return tempHTML;
+  };
+
+}
+
+function ratioMelanogaster () {
+
+  this.questionLabel = "Ratios";
+  this.timeStart = "";
+  this.timeFinish = "";
+
+  this.score_min = 0;
+  this.score_max = 60;
+
+  this.createInput = function(){
+    input = {
+      malePC: randomInt(40, 56),
+      numberOf: randomInt(50, 200)*2,
+      maleWhite: randomInt(2,4),
+      femaleWhite:randomInt(3,6),
+    };
+    return input
+  };
+
+  this.createAnswer = function(input) {
+    whiteEyes = Math.round(input.numberOf*((1/input.maleWhite)*(input.malePC/100) + (1/input.femaleWhite)*(1-input.malePC/100)));
+    redEyes = (input.numberOf - whiteEyes);
+
+    result = gcf(redEyes, whiteEyes);
+    return result
+  }
+
+  this.inputValues = this.createInput()
+  this.answer = this.createAnswer(this.inputValues);
+
+  this.dummyAnswers = function() {
+    var answerList = [this.answer];
+    while (answerList.length < 4) {
+      var dummyAnswer = this.createAnswer(this.createInput());
+      if (answerList.includes(dummyAnswer) != true) {
+        answerList.push(dummyAnswer);
+      };
+    }
+    return shuffle(answerList);
+  };
+
+  this.questionText = "In a population of " + this.inputValues.numberOf + " fruit flies."
+  this.answerText = String(this.answer[0] + ":" + this.answer[1]);
+  this.questionHTML = "<p class='question'>" + this.questionText + "</p>"
+  this.possibleAnswersHTML = function() {
+    answerList = this.dummyAnswers();
+    tempHTML = "<ul>";
+    for (i = 0; i < answerList.length; i++) {
+      tempHTML += ("<li class='answer'>" + String(answerList[i][0] + ":" + answerList[i][1]) + "</li>");
     };
     tempHTML += "</ul>";
     return tempHTML;

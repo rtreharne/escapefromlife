@@ -69,7 +69,7 @@ function questionInit () {
   this.questionObj = questionObj;
 
   for (x=0; x < this.questionElements.length; x++) {
-    var new_question = new testQuestion();
+    var new_question = new ratioMelanogaster();
     this.questionObj.push(new_question);
   };
   for (x=0; x < questionObj.length; x++) {
