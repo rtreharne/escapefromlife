@@ -32,3 +32,7 @@ function gcf(a, b) {
   d = gcd(a, b);
   return [a/d, b/d]
 }
+
+function randomItem(a) {
+  return a[Math.floor(Math.random()*a.length)];
+}

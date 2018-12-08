@@ -10,6 +10,7 @@ html(lang='en')
     link(href="css/basic.css", rel="stylesheet")
     link(href="css/style.css", rel="stylesheet")
 
+
     //if lt IE 9
       script(src='//html5shim.googlecode.com/svn/trunk/html5.js')
 
@@ -24,6 +25,20 @@ html(lang='en')
   script(type='text/javascript', src='//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js')
   script(type='text/javascript', src='js/scrolling.js')
   script(defer='', src='https://use.fontawesome.com/releases/v5.0.8/js/all.js')
+
+  script(type='text/x-mathjax-config').
+    MathJax.Hub.Config({
+    messageStyle: 'none',
+    tex2jax: {
+    inlineMath: [ ['$','$'], ["\\\(","\\)"] ],
+    processEscapes: true
+    }
+    });
+
+
+
+
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML', async='')
 
   script(src='js/useful.js')
   script(src='js/roof.js')

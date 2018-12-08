@@ -69,7 +69,7 @@ function questionInit () {
   this.questionObj = questionObj;
 
   for (x=0; x < this.questionElements.length; x++) {
-    var new_question = new ratioMelanogaster();
+    var new_question = new bodmas();
     this.questionObj.push(new_question);
   };
   for (x=0; x < questionObj.length; x++) {
@@ -78,11 +78,13 @@ function questionInit () {
     newQuestion(element, x);
 
   };
+
 }
 
 function newQuestion(e, objId, newObj=false) {
   e.html(createQuestion(questionObj[objId]));
   e.append("<p class='question-number'>"+objId+"</p>");
+  MathJax.Hub.Queue(["Typeset",MathJax.Hub,e.html]);
 }
 
 
