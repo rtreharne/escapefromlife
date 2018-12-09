@@ -36,3 +36,15 @@ function gcf(a, b) {
 function randomItem(a) {
   return a[Math.floor(Math.random()*a.length)];
 }
+
+function plusOrMinus() {
+  return randomItem([function(a, b){ return a+b}, function(a, b){ return a-b}])
+}
+
+function timesOrDivide() {
+  return randomItem([function(a, b){ return a*b}, function(a, b){ return a/b}])
+}
+
+function fractionSum(a, b) {
+  return [b[0]*a[1] + a[0]*b[1], a[1]*b[1]]
+}

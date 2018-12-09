@@ -115,7 +115,9 @@ function ratioMelanogaster () {
 }
 
 function bodmas() {
-  this.questionLabel = "Ratios";
+
+  // Need to figure out how to randome select +/- and *, /
+  this.questionLabel = "bodmas";
   this.timeStart = "";
   this.timeFinish = "";
 
@@ -130,24 +132,50 @@ function bodmas() {
     return valuesList;
   }
 
-
-
   this.inputValues = this.createInput();
 
   this.problemList = [
     {"calc": function(valuesList){
-      return (valuesList[0] - valuesList[1])*(valuesList[2] + valuesList[3])
+      return valuesList[0] - (valuesList[1])*(valuesList[2]) + valuesList[3]
       },
       "text": String(valuesList[0]) + " $-$ " +
                String(valuesList[1]) + " $\\times$ " +
                String(valuesList[2]) + " $+$ " +
                String(valuesList[3]),
     },
+    {"calc": function(valuesList){
+      return (valuesList[0] + valuesList[1] * (valuesList[2] - valuesList[3]))/valuesList[4] + valuesList[5]
+      },
+      "text": "(" + String(valuesList[0]) + " $+$ " +
+               String(valuesList[1]) + " $\\times$ " +
+               "(" + String(valuesList[2]) + " $-$ " +
+               String(valuesList[3]) + ")" + ")" + " $\\div$ " +
+               String(valuesList[4]) + " $+$ " + String(valuesList[5]),
+    },
+    {"calc": function(valuesList) {
+      return (valuesList[0]*valuesList[1]) + valuesList[2] + (valuesList[3]/valuesList[4]) - valuesList[5];
+      },
+
+    "text": String(valuesList[0]) + " $ \\times $ " +
+            String(valuesList[1]) + " $+$ " +
+            String(valuesList[2]) + " $+$ " +
+            String(valuesList[3]) + " $\\div$ " +
+            String(valuesList[4]) + " $-$ " +
+            String(valuesList[5]),
+    },
+    {"calc": function(valuesList) {
+      return fractionSum([valuesList[0], valuesList[1]], [valuesList[2], valuesList[3]]);;
+      },
+
+    "text": "$\\frac{" + valuesList[0] + "}{" + valuesList[1] + "}" + " $+$ " +
+            "\\frac{" + valuesList[2] + "}{" + valuesList[3] +"}$",
+    },
+
   ]
 
   this.problem = randomItem(this.problemList);
   this.answer = this.problem.calc(this.inputValues);
-  this.answerText = String(this.answer);
+
   this.questionText = "Evaluate " + this.problem.text;
 
   this.dummyAnswers = function() {
@@ -164,12 +192,33 @@ function bodmas() {
   this.possibleAnswersHTML = function() {
     answerList = this.dummyAnswers();
     tempHTML = "<ul>";
-    for (i = 0; i < answerList.length; i++) {
-      tempHTML += ("<li class='answer'>" + String(answerList[i]) + "</li>");
+    if (answerList[0].length != 2) {
+      for (i = 0; i < answerList.length; i++) {
+        tempHTML += ("<li class='answer' answer='"+answerList[i]+"'>" + String(answerList[i]) + "</li>");
+      };
+      tempHTML += "</ul>";
+      return tempHTML;
+    } else {
+
+      for (i = 0; i < answerList.length; i++) {
+        [answerList[i][0], answerList[i][1]] = gcf(answerList[i][0], answerList[i][1]);
+        tempHTML += ("<li class='answer' answer='"+answerList[i]+"'>" + "$\\frac{" + String(answerList[i][0]) + "}{" + String(answerList[i][1]) + "}$");
+      };
+      tempHTML += "</ul>";
+      return tempHTML;
     };
-    tempHTML += "</ul>";
-    return tempHTML;
   };
+
+  this.generateAnswerText = function (){
+    if (this.answer.length != 2) {
+      return String(this.answer);
+    } else {
+      [this.answer[0], this.answer[1]] = gcf(this.answer[0], this.answer[1]);
+      return "$\\frac{" + this.answer[0] + "}{" + this.answer[1] +"}$";
+    }
+  };
+
+  this.answerText = this.generateAnswerText();
 
 
 }

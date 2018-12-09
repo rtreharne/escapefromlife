@@ -8,7 +8,8 @@ $('a.next').click( function(e) {e.preventDefault();
 $( 'body' ).on( 'click', 'li.answer', function () {
   selected = this.innerHTML;
   parent = this.parentNode.parentNode;
-  if (this.innerHTML == $(parent).find('p.answer').text()) {
+  console.log($(this).attr("answer"), $(parent).find('p.answer').attr("answer"));
+  if ($(this).attr("answer") == $(parent).find('p.answer').attr("answer")) {
     score += 10;
     if (score >= $(parent).attr('score')) {
       forward();
