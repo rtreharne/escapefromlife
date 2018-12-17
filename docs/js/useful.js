@@ -48,3 +48,26 @@ function timesOrDivide() {
 function fractionSum(a, b) {
   return [b[0]*a[1] + a[0]*b[1], a[1]*b[1]]
 }
+
+function pcFromInt (int) {
+  if (int == 1) {
+    int = 1.1;
+  }
+  return Math.floor((1.0/int)*100);
+}
+
+function roundTo(value, dp) {
+  return Math.round(value*100)/100
+}
+
+function sigFig(value, sf) {
+  return parseFloat(value.toPrecision(sf));
+}
+
+function getSigFig (value) {
+  return value
+      .toExponential()
+      .replace(/e[\+\-0-9]*$/, '')  // remove exponential notation
+      .replace( /^0\.?0*|\./, '')    // remove decimal point and leading zeros
+      .length
+};

@@ -70,7 +70,9 @@ function questionInit () {
   this.questionObj = questionObj;
 
   for (x=0; x < this.questionElements.length; x++) {
-    var new_question = new bodmas();
+    rand = randomInt(1, allfns.length-1);
+    console.log(rand);
+    var new_question = new allfns[rand]();
     this.questionObj.push(new_question);
   };
   for (x=0; x < questionObj.length; x++) {
