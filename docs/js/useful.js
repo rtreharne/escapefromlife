@@ -112,3 +112,8 @@ function ignoreOne(val) {
     }
   }
 }
+
+function standardForm(val) {
+  sf = val.toExponential().split("e+");
+  return [parseFloat(sf[0]), parseInt(sf[1])];
+}
