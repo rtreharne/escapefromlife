@@ -72,8 +72,8 @@ function questionInit () {
   for (x=0; x < this.questionElements.length; x++) {
     rand = randomInt(1, allfns.length-1);
     console.log(rand);
-    //var new_question = new allfns[rand]();
-    var new_question = new standardFormBasic();
+    var new_question = new allfns[rand]();
+    //var new_question = new standardFormBasic();
     this.questionObj.push(new_question);
   };
   for (x=0; x < questionObj.length; x++) {

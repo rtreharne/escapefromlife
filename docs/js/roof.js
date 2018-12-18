@@ -44,9 +44,8 @@
           return sigFig(Math.PI*valuesList[0]**2*(valuesList[1]/3), getSigFig(valuesList[0]));
           },
           "text": "Calculate the area of a cone with radius $r=" +String(valuesList[0]) +
-           "\\ \\mathrm{cm}$ and a height $h = " + String(valuesList[1]) +"\\ \\mathrm{cm}$" +
-           ". Express your answer to the appropriate number of "+
-           "significant figures. The area of a cone is determined by " + "$\\pi r^{2}\\frac{h}{3}$"
+           "\\ \\mathrm{cm}$ and a height $h = " + String(valuesList[1]) +"\\ \\mathrm{cm}$" +       
+           "The area of a cone is determined by " + "$\\pi r^{2}\\frac{h}{3}$"
         },
       ]
 
@@ -327,11 +326,77 @@
 
     };
 
+    function standardFormBasic () {
+      this.questionLabel = "Standard Form Basic";
+      this.questionTags = ["GCSE", "standard form"];
+      this.timeStart = ""
+      this.timeFinish = "";
+
+      this.score_min;
+      this.score_max = 60;
+
+      this.values_dict = {"million": 1000000,
+                          "billion": 1000000000,
+                          "thousand": 1000,
+                          "trillion": 1000000000000};
+
+      this.createInput = function() {
+        value = randomIntNonZero(10, 900);
+        suffix = randomItem(Object.keys(this.values_dict));
+        return [value, suffix]
+      }
+
+      this.inputValues = this.createInput();
+
+      this.problemList = [
+        {"calc": function(valuesList, dict){
+          return standardForm(valuesList[0]*dict[valuesList[1]]);
+          },
+          "txt": function(valuesList, dict) {
+            str = "What is " + String(valuesList[0]) + " " + valuesList[1] +
+            " in standard form?"
+            return str
+          },
+        },
+      ]
+
+      this.problem = randomItem(this.problemList);
+
+      this.answer = this.problem.calc(this.inputValues, this.values_dict);
+
+      this.questionText = this.problem.txt(this.inputValues, this.values_dict);
+
+      this.dummyAnswers = function() {
+        var answerList = [this.answer];
+        answerList.push([roundTo(this.answer[0]/10, 2), this.answer[1]+1]);
+        answerList.push([roundTo(this.answer[0]*10, 2), this.answer[1]-1]);
+        answerList.push([this.answer[0], this.answer[1]-2]);
+
+        return shuffle(answerList);
+      }
+
+      this.possibleAnswersHTML = function() {
+        answerList = this.dummyAnswers();
+        tempHTML = "<ul>";
+        for (i = 0; i < answerList.length; i++) {
+          tempHTML += ("<li class='answer' answer='"+answerList[i]+"'>" + "$" +
+          answerList[i][0] + "\\times 10^{" + answerList[i][1] +"}$" + "</li>");
+        };
+        tempHTML += "</ul>";
+        return tempHTML;
+
+      }
+
+      this.answerText = this.answer;
+
+    };
+
     return { getAllFunctions: getAllFunctions
             ,calculateVolume: calculateVolume
             ,ratioMelanogaster: ratioMelanogaster
             ,bodmas: bodmas
-            ,simultaneousEquation: simultaneousEquation };
+            ,simultaneousEquation: simultaneousEquation
+            ,standardFormBasic: standardFormBasic };
   }();
 
 //usage
