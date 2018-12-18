@@ -126,3 +126,71 @@ function standardFormBasic () {
   this.answerText = this.answer;
 
 };
+
+function factoriseBasic () {
+  this.questionLabel = "Factorise";
+  this.questionTags = ["GCSE", "factorise"];
+  this.timeStart = ""
+  this.timeFinish = "";
+
+  this.score_min;
+  this.score_max = 60;
+
+  this.createInput = function() {
+    valuesList = []
+
+    for (i = 0; i < 20; i++) {
+      valuesList.push(randomIntNonZero(-11, 11));
+    }
+    return valuesList;
+
+  }
+
+  this.inputValues = this.createInput();
+
+  this.problemList = [
+    {"calc": function(valuesList){
+      return [valuesList[0], valuesList[1]];
+      },
+      "text": function(valuesList) {
+        if (valuesList[0] == -valuesList[1]) {
+          return "Factorise: $x^2 " +  posOrNegOneStr(valuesList[0]*valuesList[1]) + "$"
+        } else {
+          return "Factorise: $x^2 " + posOrNegStr(valuesList[0]+valuesList[1]) + "x" + posOrNegOneStr(valuesList[0]*valuesList[1]) + "$."
+        }
+      }
+    },
+  ]
+
+  this.problem = randomItem(this.problemList);
+
+  this.answer = this.problem.calc(this.inputValues);
+
+  this.questionText = this.problem.text(this.inputValues);
+
+  this.dummyAnswers = function() {
+    var answerList = [this.answer];
+    while (answerList.length < 4) {
+      var dummyAnswer = this.problem.calc(shuffle(this.inputValues));
+      if (answerList.includes(dummyAnswer) != true) {
+        answerList.push(dummyAnswer);
+      };
+    }
+    return shuffle(answerList);
+  }
+
+  this.possibleAnswersHTML = function() {
+    answerList = this.dummyAnswers();
+    tempHTML = "<ul>";
+    for (i = 0; i < answerList.length; i++) {
+      tempHTML += ("<li class='answer' answer='"+answerList[i]+"'>" +
+                   "$(x" + posOrNegOneStr(answerList[i][0]) + ")(x" + posOrNegOneStr(answerList[i][1]) + ")$" + "</li>");
+    };
+    tempHTML += "</ul>";
+    return tempHTML;
+
+  }
+
+  this.answerText = this.answer;
+
+};

@@ -13,3 +13,16 @@ h1.big-title {
 
 h1.main-title {
   font-size: 4em; }
+
+li {
+  list-style: none;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #eee;
+  width: 100%;
+  line-height: 60px; }
+
+ul {
+  margin: 0;
+  padding: 0; }

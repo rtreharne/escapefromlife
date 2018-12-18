@@ -97,6 +97,15 @@ function posOrNegStr(val) {
   }
 }
 
+function posOrNegOneStr(val) {
+  if (val < 0) {
+      return "- " + Math.sqrt(val**2);
+    } else {
+      return "+ " + Math.sqrt(val**2);
+    }
+  }
+
+
 function ignoreOne(val) {
   if (val < 0) {
     if (Math.sqrt(val**2) == 1) {

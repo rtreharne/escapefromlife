@@ -44,7 +44,7 @@
           return sigFig(Math.PI*valuesList[0]**2*(valuesList[1]/3), getSigFig(valuesList[0]));
           },
           "text": "Calculate the area of a cone with radius $r=" +String(valuesList[0]) +
-           "\\ \\mathrm{cm}$ and a height $h = " + String(valuesList[1]) +"\\ \\mathrm{cm}$" +       
+           "\\ \\mathrm{cm}$ and a height $h = " + String(valuesList[1]) +"\\ \\mathrm{cm}$" +
            "The area of a cone is determined by " + "$\\pi r^{2}\\frac{h}{3}$"
         },
       ]
@@ -399,8 +399,5 @@
             ,standardFormBasic: standardFormBasic };
   }();
 
-//usage
+
 var allfns = MyNamespace.getAllFunctions();
-//=> allfns is now an array of functions.
-//   You can run allfns[0]() for example
-console.log(allfns.slice(1));
