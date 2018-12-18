@@ -73,6 +73,7 @@ function questionInit () {
     rand = randomInt(1, allfns.length-1);
     console.log(rand);
     var new_question = new allfns[rand]();
+    //var new_question = new simultaneousEquation();
     this.questionObj.push(new_question);
   };
   for (x=0; x < questionObj.length; x++) {

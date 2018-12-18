@@ -4,6 +4,15 @@ function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function randomIntNonZero(min, max) {
+  int = randomInt(min, max);
+  if (int == 0) {
+    return randomIntNonZero(min, max);
+  } else {
+    return int;
+  }
+}
+
 function randomInts(n, min, max) {
   var nList = [];
   for (i = 0; i < n; i++) {
@@ -71,3 +80,35 @@ function getSigFig (value) {
       .replace( /^0\.?0*|\./, '')    // remove decimal point and leading zeros
       .length
 };
+
+function posOrNegStr(val) {
+  if (val < 0) {
+    if (Math.sqrt(val**2) == 1) {
+      return "- "
+    } else {
+      return "- " + Math.sqrt(val**2);
+    }
+  } else {
+    if (Math.sqrt(val**2) == 1) {
+      return "+ "
+    } else {
+      return "+ " + Math.sqrt(val**2)
+    }
+  }
+}
+
+function ignoreOne(val) {
+  if (val < 0) {
+    if (Math.sqrt(val**2) == 1) {
+      return "- "
+    } else {
+      return "- " + Math.sqrt(val**2);
+    }
+  } else {
+    if (val == 1) {
+      return ""
+    } else {
+      return val
+    }
+  }
+}
